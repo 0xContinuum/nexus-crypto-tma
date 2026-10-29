@@ -8,8 +8,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
-    // Backend API'den ilk 10 coin verisini çekme
-    fetch('https://PROJEROOT_URL_BURAYA_GELECEK/api/market-overview')
+    // Backend API'den ilk 10 coin verisini çekme (Render URL'in eklendi)
+    fetch('https://nexus-crypto-tma.onrender.com/api/market-overview')
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {

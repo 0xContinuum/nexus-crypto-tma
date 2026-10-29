@@ -45,7 +45,7 @@ export default function App() {
         </div>
         <div className="text-right">
           <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse mr-1.5"></span>
-          <span className="text-xs text-emerald-400 font-medium">Live Feed</span>
+          <span className="text-xs text-emerald-400 font-medium">Live Terminal</span>
         </div>
       </header>
 
@@ -63,27 +63,24 @@ export default function App() {
         </button>
       </div>
 
-      {/* COIN LIST */}
+      {/* COIN / SIGNAL LIST */}
       {loading ? (
         <div className="text-center py-20 text-cyan-500 animate-pulse font-mono">Loading Market Matrix...</div>
       ) : (
         <div className="space-y-3">
           {coins.map((coin, index) => (
             <div key={index} onClick={() => setSelectedCoin(coin)} className="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4 hover:border-cyan-500/50 transition-all cursor-pointer">
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-3">
                 <div className="flex items-center gap-2">
                   <span className="font-black text-white text-base">{coin.symbol}</span>
                   <span className="text-xs text-slate-500">{coin.name}</span>
                 </div>
-                <div className="text-right">
-                  <div className="font-mono font-bold text-white">${coin.price > 10 ? coin.price.toLocaleString() : coin.price.toFixed(4)}</div>
-                  <div className={`text-xs font-semibold ${coin.change_24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    {coin.change_24h >= 0 ? '+' : ''}{coin.change_24h}%
-                  </div>
-                </div>
+                <span className="text-[11px] bg-cyan-950/80 text-cyan-300 px-2 py-1 rounded border border-cyan-800/50 font-mono font-semibold">
+                  Grafik & Analiz 📈
+                </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800/60 text-xs">
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800/60 text-xs">
                 <div className="bg-slate-950 p-2 rounded border border-slate-800">
                   <span className="text-slate-500 block text-[10px]">Trend Matrix</span>
                   <span className="font-bold text-cyan-300">{coin.trend_matrix}</span>
@@ -109,7 +106,7 @@ export default function App() {
           <div className="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl p-4 shadow-2xl flex flex-col max-h-[90vh]">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
-                {selectedCoin.symbol} <span className="text-xs text-cyan-400 font-mono">${selectedCoin.price.toLocaleString()}</span>
+                {selectedCoin.symbol} <span className="text-xs text-emerald-400 font-mono">Live TradingView Chart</span>
               </h3>
               <button 
                 onClick={() => { setSelectedCoin(null); setIsUnlocked(false); }}
@@ -118,8 +115,8 @@ export default function App() {
               </button>
             </div>
 
-            {/* TradingView Interactive Chart Widget */}
-            <div className="w-full h-64 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 mb-3">
+            {/* TradingView Interactive Chart Widget (Shows accurate live price) */}
+            <div className="w-full h-72 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 mb-3">
               <iframe
                 title="TradingView Chart"
                 src={`https://s.tradingview.com/widgetembed/?symbol=BINANCE:${selectedCoin.symbol}USDT&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC`}
